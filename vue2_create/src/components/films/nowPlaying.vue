@@ -88,7 +88,7 @@ li {
     }
 
     .grade {
-      color: #797d82;
+      color: #ffb232;
       padding-bottom: 8px;
     }
 
@@ -108,5 +108,6 @@ li {
   position absolute
   right 10px
   bottom 74px
+  color: #ffb232
 
 </style>

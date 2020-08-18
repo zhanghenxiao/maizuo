@@ -6,6 +6,7 @@ import film from '@/components/films/film'
 import nowplaying from '@/components/films/nowPlaying'
 import comingsoon from '@/components/films/comingSoon'
 import detail from '@/components/detail'
+import cinemasDateil from '@/components/cinemas/cinemasDetail'
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,12 @@ const routes = [
     component: detail
   },
   {
+    // 动态路由 要加冒号 不然就是个死路劲，接收传入id
+    path: '/cinemasDetail/:myid',
+    name: 'cinemasDetail',
+    component: cinemasDateil
+  },
+  {
   path: '*',
   redirect: '/film'
   }
@@ -67,7 +74,10 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router
