@@ -8,8 +8,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isShow: true,
-    comingSoon: []
+    // 只要网页不被刷新，就会使用vuex 中缓存数据
+    comingSoon: [],
+    localcities: {}
   },
+  // 操作同步
   mutations: {
     // 二种写法
     // SHOW_NAV(state,data){
@@ -24,14 +27,19 @@ export default new Vuex.Store({
     },
     comingSoonAction(state,data){
       state.comingSoon = data
+    },
+    // data数据是city.vue传过来的数据
+    changeCities(state,data){
+      localStorage.cities = data
     }
   },
+  // 操作异步
   actions: {
     // 异步处理，这里一定要写的是store
     getComingSoonData(store){
       axios({
         url:
-        'https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=2&k=8030391',
+        'https://m.maizuo.com/gateway?cityId=510100&pageNum=1&pageSize=10&type=2&k=2235178',
         headers: {
           "X-Client-Info":
             '{"a":"3000","ch":"1002","v":"5.0.4","e":"15889272153375844294689","bc":"110100"}',

@@ -1,27 +1,29 @@
 <template>
-  <div class="detail">
-    <img :src="item.poster" height="211px" width="375px" />
+  <div class="detail" v-if="item">
+    <!-- <img :src="item.poster" height="211px" width="375px" /> -->
+    <img :src="item.poster" class="poster" />
     <div class="des">
-      <div class="name">{{item.name}}</div>
+      <div class="name" style="color:#191a1b">{{item.name}}</div>
       <div class="category">{{item.category}}</div>
       <div class="nation">{{item.nation}} | {{item.runtime}}</div>
       <div class="synopsis">主演{{item.synopsis}}</div>
     </div>
     <h3 class="text">演职人员</h3>
-    <myswiper>
+    <!-- 通过父传子实现组件的共有,因class相同故需设置不同class才能实现渲染不同的个数-->
+    <myswiper Perview=4 class="actors" myclass='actors'>
       <div class="swiper-slide" v-for="(actors,index) in item.actors" :key="index">
         <img class="im" :src="actors.avatarAddress">
-        <div>
+        <div style="text-align:center">
           {{actors.name}}
         </div>
-        <div>
+        <div style="text-align:center">
           {{actors.role}}
         </div>
       </div>
     </myswiper>
 
     <h3 class="text">剧照</h3>
-    <myswiper>
+    <myswiper Perview=3 class="photos" myclass='photos'>
       <div class="swiper-slide" v-for="item in item.photos" :key="item">
         <img class="im" :src="item">
       </div>
@@ -36,7 +38,7 @@ import myswiper from './swiper'
 export default {
   data() {
     return {
-      item: {},
+      item: null,
       data: [1,2,3,4]
     };
   },
@@ -82,6 +84,7 @@ export default {
 
   .des {
     padding-left 10px
+    color #797d82
   }
 
   .name {
@@ -107,12 +110,18 @@ export default {
   .im{
     width: 85px;
     height: 85px;
+    padding-left 10px
+    padding-bottom 5px
   }
+  
   .test
     background yellow
   .text
-    padding-top 10px
-    padding-bottom 10px
+    padding 10px 0px 10px 10px
     color #191a1b
-    font-size 18px
+    font-size 14px
+.poster
+  width 100%
+  height 211px
+  padding-bottom 10px
 </style>

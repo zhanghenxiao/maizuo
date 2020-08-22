@@ -2,7 +2,9 @@
   <div>
     <div class="city">
       <div class="cityname">
-        <div class="name">北京</div>
+        <router-link to="/city" tag="div" class="name">
+          北京
+        </router-link>
         <div class="cinemas">影院</div>
         <div class="search">搜索</div>
       </div>
@@ -12,22 +14,41 @@
         <div>最近去过</div>
       </div>
     </div>
-    <div class="des" v-for="item in cinemas" :key="item.cinemaId" @click="change(item.cinemaId)">
-      <div class="name">{{item.name}}</div>
-      <div class="address">{{item.address}}</div>
-      <!-- <div class="price">￥{{item.lowPrice /100}}起</div> -->
+    <!-- 内联样式优先级高于外联样式try -->
+    <div class="try" :style="mystyle">
+      <ul>
+        <li
+          class="des"
+          v-for="item in cinemas"
+          :key="item.cinemaId"
+          @click="change(item.cinemaId)"
+        >
+          <div class="name">{{ item.name }}</div>
+          <div class="address">{{ item.address }}</div>
+        </li>
+        <!-- <div class="price">￥{{item.lowPrice /100}}起</div> -->
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+import BScroll from "better-scroll";
 export default {
   data() {
     return {
-      cinemas: []
-    }
+      cinemas: [],
+      mystyle:{
+        height: '0px'
+      }
+    };
   },
   mounted() {
+    // 浏览器窗口高度
+    console.log(document.documentElement.clientHeight)
+    const windowHeight = document.documentElement.clientHeight
+    this.mystyle.height = windowHeight - 134.6 +'px'
+    console.log(this.mystyle.height);
     this.getData();
   },
   methods: {
@@ -46,16 +67,33 @@ export default {
         const cinemas = res.data.data.cinemas;
         // console.log(films);
         this.cinemas = cinemas;
+        // 等待上个状态完成后再执行后面的
+        this.$nextTick(() => {
+          // 注意这个小点
+          new BScroll(".try",{
+            click: true,//点击事件无效，需添加可pass
+            scrollbar: {// 滚动条
+              fade: true,
+              interactive: false,
+                
+            }
+          });
+        });
       });
     },
     change(id) {
-      this.$router.push(`/cinemasDetail/${id}`)
-    }
+      this.$router.push(`/cinemasDetail/${id}`);
+    },
   },
-}
+};
 </script>
 
 <style lang="stylus" scoped>
+.try
+  height 300px
+  overflow hidden
+  // 让BScroll 不划出页面
+  position relative
 .cityname
   display flex
   height 40px

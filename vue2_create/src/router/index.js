@@ -7,7 +7,7 @@ import nowplaying from '@/components/films/nowPlaying'
 import comingsoon from '@/components/films/comingSoon'
 import detail from '@/components/detail'
 import cinemasDateil from '@/components/cinemas/cinemasDetail'
-
+import city from '@/components/city'
 Vue.use(VueRouter)
 
 const routes = [
@@ -55,6 +55,11 @@ const routes = [
     path: '/cinemasDetail/:myid',
     name: 'cinemasDetail',
     component: cinemasDateil
+  },
+  {
+    path: '/city',
+    name: 'city',
+    component: city
   },
   {
   path: '*',

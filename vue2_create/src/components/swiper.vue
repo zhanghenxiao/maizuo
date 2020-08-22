@@ -13,17 +13,20 @@ import Swiper from 'swiper' //js文件
 // 注意导入文件swiper 的路劲在node_modules中。。。
 import 'swiper/css/swiper.min.css'  //css文件
 export default {
+  // 接受父组件传过来的值一定要加''
+  props: ['Perview','myclass'],
   mounted() {
-   new Swiper('.swiper-container', {
-    //  autoplay: true,    //自动播放
+  //  new Swiper('.swiper-container', {
+    new Swiper('.'+ this.myclass, { 
+     autoplay: true,    //自动播放
     //  loop: true,        //循环播放
     //  delay: 500,       //每张图间隔秒
       //分页器
       // pagination: {
       //   el: ".swiper-pagination"
       // },
-      slidesPerView: 3,
-      spaceBetween: 2,
+      slidesPerView: this.Perview, //展示个数
+      spaceBetween: 10, //间隔距离
     });
   }, 
 }

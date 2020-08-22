@@ -1,5 +1,16 @@
 <template>
-  <div class="film">
+  <div>
+    <!-- 采用动态绑定（需先定义isfixed）+ 三目运算 -->
+    <div ref="title" :class="isfixed?'fixed':'' ">
+      <div class='des' v-show='show'>
+        <div class="city">上海</div>
+        <div class="film">电影</div>
+      </div>
+      <toplink></toplink>
+    </div>
+   <router-view></router-view>
+  </div>
+  <!-- <div class="film">
     <div class="topnav1" v-show="sure">
       <router-link to="/film/nowplaying" active-class="myactive">
         <span>正在热映</span>
@@ -20,17 +31,21 @@
       </div>
     </div>
     <router-view></router-view>
-  </div>
+  </div> -->
+  
 </template>
 
 <script>
+import toplink from '../toplink'
 export default {
   data() {
     return {
       show: false,
-      sure: true
+      sure: true,
+      isfixed: ''
     }
   },
+  components: {toplink},
   mounted() {
     // 监听滚动事件,使用完之后需解绑，这是全局事件,
     window.onscroll = this.userOnscroll;
@@ -38,27 +53,48 @@ export default {
   },
   methods: {
     userOnscroll() {
-      // 输出距离顶部的滚动值
+      // 输出用户距离顶部的滚动值
       const top = document.documentElement.scrollTop;
-      console.log(top)
-      if (top >= 79) {
+      // 动态获取顶部值
+      const titleheight = this.$refs.title.offsetHeight
+      // console.log(titleheight);
+      // console.log(top)
+      if (top >= titleheight) {
         this.show = true
-        this.sure = false
+        this.isfixed = true
+        // console.log(this.isfixed);
       }
       else{
         this.show = false
-        this.sure = true
+        this.isfixed = false
       }
     },
   },
   destroyed() {
-    console.log('destroyed');
+    // console.log('destroyed');
+    // 在这个页面销毁后，取绑全局监听事件
     window.onscroll = null
   }
 };
 </script>
 
 <style lang="stylus" scoped>
+.fixed
+  position fixed
+  left 0px
+  top 0px
+  width 100%
+  height 93px
+.des
+  padding-top 10px
+  display flex
+  text-align center
+  .city
+    flex 0, 0, 44px
+  .film
+    flex 1
+    font-size 18px
+    font-weight 20px 
 .myactive
   color red
 .scorll {

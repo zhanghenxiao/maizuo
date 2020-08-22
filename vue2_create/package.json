@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "better-scroll": "^1.15.2",
     "core-js": "^3.6.5",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",

@@ -3,15 +3,17 @@
     <!-- 路由容器  可放入多个-->
     <router-view></router-view>
     <usernav v-if="isShow"></usernav>
+    <!-- <test></test> -->
   </div>
 </template>
 
 <script>
+import test from './components/test'
 import nav from './components/nav'
 import {mapState} from 'vuex'
 // 需求电影页面顶部实现，;class='isfiexd'?'fiexd':'' 监听(window)用户滑动动态获取顶部距离($ref.div.$el.offsetHi)，后解绑destroyed===>
 // 对相同的东西进行组件封装，解绑失败。。。
-// 需求电影详情页实现，封装swiper,利用插槽及父传子动态选择轮播数量，及传入不同名class ===>
+// 需求电影详情页实现，组件化思想（终极定义父传子，可处理一切需求）封装swiper,利用插槽及父传子动态选择轮播数量，及传入不同名class ===>
 // swiper实现封装失败。。。
 // 需求影院页实现， 利用better-scroll 平滑实现滚动，及时渲染 nexttick 注意better得结构，及底部导航得兼容显示
 // 需求nav 电影页切换至电影详情页显示与隐藏实现 ===>
@@ -25,7 +27,8 @@ import {mapState} from 'vuex'
 // 开发我的页面，借助端口开发登录注册功能，及实现购买情况，并在我的订单中能查看到
 export default {
   components: {
-    usernav:nav
+    usernav:nav,
+    // test
   },
   computed: {
     // 展开合并运算符（这个蛮有意思的，合并二个列表），获取isShow变量状态,控制nav的显示与隐藏
