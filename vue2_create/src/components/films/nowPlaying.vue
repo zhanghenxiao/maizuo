@@ -30,6 +30,7 @@ export default {
   },
   mounted() {
     this.getData();
+    console.log(localStorage.localcity);
   },
   methods: {
     changePage(id) {
@@ -38,14 +39,17 @@ export default {
       this.$router.push(`/detail/${id}`) 
     },
     //  卖座电影 https://m.maizuo.com/v5/?co=mzmovie#/films/nowPlaying
+    
     getData() {
       //  简写
       //  this.$http.get('/ajax/movieOnInfoList?token=').then(res =>{
       //    console.log(res.data)
       //  })
+      const localcityid = localStorage.localcity;
       this.$http({
         url:
-          "https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=2402857",
+          // 'https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=2402857',
+          `https://m.maizuo.com/gateway?cityId=${localcityid}&pageNum=1&pageSize=10&type=1&k=2402857`,
         headers: {
           "X-Client-Info":
             '{"a":"3000","ch":"1002","v":"5.0.4","e":"15889272153375844294689","bc":"110100"}',

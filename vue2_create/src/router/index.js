@@ -45,6 +45,11 @@ const routes = [
     component: cinemas
   },
   {
+    path: '/cinemas/:myid',
+    name: 'cinemas',
+    component: cinemas
+  },
+  {
     // 动态路由 要加冒号 不然就是个死路劲，接收传入id
     path: '/detail/:myid',
     name: 'detail',
@@ -61,11 +66,14 @@ const routes = [
     name: 'city',
     component: city
   },
+  // {
+  // path: '*',
+  // redirect: '/film'
+  // }
   {
   path: '*',
-  redirect: '/film'
+  redirect: '/city'
   }
-  
 
 
   // {

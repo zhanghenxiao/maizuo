@@ -2,7 +2,10 @@
   <div>
     <div class="close">
       <div class="offflex">
-        <div class="off">x</div>
+        <router-link to="./cinemas">
+          <div class="off">x</div>
+        </router-link>
+        
         <div class="nowcity">当前城市</div>
       </div>
       <div class="search-wrapper">
@@ -21,16 +24,25 @@
         <!-- <div class="cancel">取消</div> -->
       </div>
     </div>
+    <div class="positioncity">
+      <p>GPS定位你所在得城市</p>
+      <div v-if="city">
+        {{city}}
+      </div>
+      <div v-else>
+        定位失败
+      </div>
+    </div>
     <ul>
       <h5 style="color=#797d82">热门城市</h5>
-      <div v-for="item in urlcities" :key="item.name" @click="change(item.cityId)">
-        <div class="container">
+      <div v-for="item in urlcities" :key="item.name">
+        <div class="container" @click="changecity(item.cityId)">
           <div v-show="item.isHot === 1">
             {{ item.name }}
           </div>
         </div>
       </div>
-      <li class="item" v-for="item in urlcities" :key="item.cityId">
+      <li class="item" v-for="item in urlcities" :key="item.cityId" @click="changecity(item.cityId)">
         {{item.name}}
       </li>
     </ul>
@@ -40,6 +52,9 @@
 
 <script>
 import citys from "@/assets/city.json";
+import { showLoading, hideLoading } from './elloading';
+import { Indicator } from 'mint-ui'
+import getCurrentCityName from './positioning'
 export default {
   data() {
     return {
@@ -48,7 +63,18 @@ export default {
       keyword: "",
       searchlist: [],
       timer: null,
+      city: '',
     };
+  },
+  beforeCreate() {
+    // showLoading()
+    Indicator.open({
+    text: '正在定位...',
+    spinnerType: 'fading-circle'
+    });
+  },
+  created() {
+    this.positionCity()
   },
   computed: {
     // generateSmall() {
@@ -140,6 +166,12 @@ export default {
     // console.log(this.cities);
   },
   methods: {
+    positionCity() {
+        getCurrentCityName().then((city) =>{
+          console.log(city);
+          this.city = city
+        });
+    },
     //  卖座电影 https://m.maizuo.com/v5/?co=mzmovie#/films/nowPlaying
     getData() {
       //  简写
@@ -155,6 +187,8 @@ export default {
         },
       }).then((res) => {
         const cities = res.data.data.cities;
+        Indicator.close();
+        // hideLoading()
         // const citylist = []
         // cities.forEach(element => {
         //   // console.log(element.name)
@@ -165,12 +199,18 @@ export default {
         // var arr = ['你好','啊', '不好']
         // console.log(arr.sort());
         this.urlcities = cities;
-        console.log(cities);
+        // console.log(cities);
         // 传入数据cities数据至store中mutations 的changeCities中
         // this.$store.commit('changeCities',cities)
       });
     },
-  },
+    changecity(id) {
+      this.$store.commit('changecitymutations',id)
+      this.$router.push(`/cinemas/${id}`)
+      console.log(localStorage.localcity)
+      // console.log(data);
+     },
+    },
 };
 </script>
 
@@ -190,6 +230,8 @@ export default {
 .item 
   padding-top 10px
   border: 1px solid #e5e4e9
+.positioncity
+  padding-bottom 10px
 .close
   .offflex
     padding-top 10px
@@ -218,6 +260,7 @@ export default {
       height 30px
       line-height 30px
       box-sizing border-box
+      z-index 100
       .item
         z-index 100
         background yellow

@@ -1,9 +1,13 @@
 <template>
   <div>
     <div class="city">
-      <div class="cityname">
-        <router-link to="/city" tag="div" class="name">
-          北京
+      <div class="cityname" v-if="cinemas">
+        <!-- 根据不同的城市选择，渲染不同的城市影院页面 -->
+        <router-link to="/city" tag="div" class="nameif">
+          <!-- v-if="cinemas[0].cityName" -->
+          <p >
+            {{cinemas[0].cityName}}  
+          </p>
         </router-link>
         <div class="cinemas">影院</div>
         <div class="search">搜索</div>
@@ -53,10 +57,12 @@ export default {
   },
   methods: {
     //  卖座电影 https://m.maizuo.com/v5/?co=mzmovie#/films/nowPlaying
+    
     getData() {
       this.$http({
         url:
-          "https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=5612313",
+          // "https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=5612313",
+          `https://m.maizuo.com/gateway?cityId=${localStorage.localcity}&ticketFlag=1&k=5612313`,
         headers: {
           "X-Client-Info":
             '{"a":"3000","ch":"1002","v":"5.0.4","e":"15889272153375844294689","bc":"110100"}',
@@ -75,7 +81,6 @@ export default {
             scrollbar: {// 滚动条
               fade: true,
               interactive: false,
-                
             }
           });
         });

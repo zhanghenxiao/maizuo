@@ -1,34 +1,25 @@
 <template>
-  <div class="try">
-    <ul>
-      <li v-for="item in list" :key="item">
-        <div>1</div>
-        <div>2</div>
-      </li>
-    </ul>
+  <div>
+    <div id="box" v-show="false"></div>
   </div>
 </template>
 
 <script>
-import BScroll from "better-scroll";
-export default {
-  data() {
-    return {
-      list: 10
+// import getCurrentCityName from './a';
+export default{
+    mounted(){
+      this.test()
+    },
+    methods: {
+      test() {
+        getCurrentCityName().then((city) =>{
+          console.log(city);
+        });
+      }
     }
-  },
-  mounted() {
-    new BScroll(".try")
-  },
 }
 </script>
 
 <style lang="stylus" scoped>
-div
-  height 300px
-  overflow hidden
-li
-  height 50px
-  width 100%
-  background red
+
 </style>

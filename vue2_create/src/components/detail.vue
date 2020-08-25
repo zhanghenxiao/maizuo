@@ -1,4 +1,5 @@
 <template>
+<!-- 电影详情页 -->
   <div class="detail" v-if="item">
     <!-- <img :src="item.poster" height="211px" width="375px" /> -->
     <img :src="item.poster" class="poster" />

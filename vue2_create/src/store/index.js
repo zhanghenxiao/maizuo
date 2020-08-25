@@ -10,7 +10,9 @@ export default new Vuex.Store({
     isShow: true,
     // 只要网页不被刷新，就会使用vuex 中缓存数据
     comingSoon: [],
-    localcities: {}
+    localcities: {},
+    //存储
+    localcity: '' 
   },
   // 操作同步
   mutations: {
@@ -31,15 +33,20 @@ export default new Vuex.Store({
     // data数据是city.vue传过来的数据
     changeCities(state,data){
       localStorage.cities = data
-    }
+    },
+    changecitymutations(state,data) {
+      localStorage.localcity = data
+    },
   },
+
   // 操作异步
   actions: {
     // 异步处理，这里一定要写的是store
     getComingSoonData(store){
       axios({
         url:
-        'https://m.maizuo.com/gateway?cityId=510100&pageNum=1&pageSize=10&type=2&k=2235178',
+        // 'https://m.maizuo.com/gateway?cityId=510100&pageNum=1&pageSize=10&type=2&k=2235178',
+        `https://m.maizuo.com/gateway?cityId=${localStorage.localcity}&pageNum=1&pageSize=10&type=2&k=2235178`,
         headers: {
           "X-Client-Info":
             '{"a":"3000","ch":"1002","v":"5.0.4","e":"15889272153375844294689","bc":"110100"}',
