@@ -113,6 +113,10 @@ export default {
       if (this.timer) {
         clearTimeout(this.timer);
       }
+      // 无数据时，清空list 
+      if(!this.keyword){
+        return this.searchlist = []
+      }
       this.timer = setTimeout(() => {
         const reslut = [];
         this.urlcities.forEach((element) => {
