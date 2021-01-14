@@ -1,13 +1,18 @@
 <template>
   <div>
     <!-- 采用动态绑定（需先定义isfixed）+ 三目运算 -->
-    <div ref="title" :class="isfixed?'fixed':'' ">
-      <div class='des' v-show='show'>
-        <div class="city">上海</div>
-        <div class="film">电影</div>
+    <div :class="isfixed ? 'header': '' ">
+      <div ref="title" :class="isfixed ? 'fixed': '' ">
+        <div class='des' v-show='show'>
+          <div class="city">上海</div>
+          <div class="film">电影</div>
+        </div>
+        <toplink></toplink>
       </div>
-      <toplink></toplink>
     </div>
+
+
+    
    <router-view></router-view>
   </div>
   <!-- <div class="film">
@@ -79,12 +84,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.header
+  height 93px
+  background-color pink
 .fixed
   position fixed
   left 0px
   top 0px
   width 100%
-  height 93px
+  background-color #ffffff
+  z-index 100
 .des
   padding-top 10px
   display flex

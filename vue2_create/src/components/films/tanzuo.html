@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ti{
+      margin: 50px auto;
+      width: 300px;
+      height: 300px;
+      border: 1px 
+    }
+    .sy{
+      margin: 5px;
+      width: 50px;
+      height: 50px;
+      background:pink;
+    }
+  </style>
+  <div class="sy">01</div>
+  <div class="sy">02</div>
+  <div class="sy">03</div>
+  <div class="sy">04</div>
+  <div class="sy">05</div>
+  <div class="sy">06</div>
+  <div class="sy">07</div>
+  <div class="sy">08</div>
+  <div class="sy">09</div>
+  <div class="sy" contenteditable="true">10</div>
+
+  <script>
+  
+
+    // npm i --save
+    // npm i --dev
+    // npm login
+    // npm publish 
+    
+
+  </script>
+
+  <!-- <script>
+    let alldiv = document.getElementsByClassName('sy')
+    for(let i=0; i < alldiv.length; i++){
+      alldiv[i].onclick = function() {
+       console.log( alldiv[i].innerHTML);
+       console.log(`当前点击的div是第${i}个`); 
+      }
+    } 
+  </script> -->
+
+  <!-- <script>
+    // if 与 switch 转换时需满足二个条件，对比的是同个值如同时对比变量a，值1，2，3
+    // if 与 三目运算转换时需满足二个条件，if仅有一个真假，只有一条输出语句
+    // if 为假的三种情况 null,undefined,NaN,0,""(空字符),false
+    let mark = true //开关
+    box1 = document.getElementById('sy')
+    box1.onclick = function() {  // 事件函数
+      if (mark){
+      box1.style.width = '100px'
+      mark =  false
+      } else {
+        box1.style.width = '50px'
+        mark =  true
+      }
+    }
+  </script> -->
+
+  <!--id 独有标签 类名 标签名 input name 选择器-->
+  <!-- <script>
+    document.getElementById
+    let b1 = document.body //独有标签
+    console.log(b1);
+    let tag1 = document.getElementsByTagName('div')
+    console.log(tag1);
+    document.getElementsByClassName('div')  //集合
+    document.getElementsByName //用于input标签
+    document.querySelectorAll('#div p') //集合
+    document.querySelector('div p') //独立标签 满足一个即返回
+  </script> -->
+
+  <!-- <script>
+    let div1 = document.getElementById('test'), //可定义多个变量
+        div2 = document.getElementById('bar'),
+        now = 'pink',
+        color = '#f60';
+
+    div1.onmouseenter = function() {
+      // div1.style.backgroundColor = color // js中存在运算符（-color） 故采用驼峰用法
+      div1.style.cssText ="width:100px;height:100px;background-color:yellow" // 一行写多行样式
+    }
+    div1.onmouseleave = function() {
+      div1.style.backgroundColor = now
+    }
+  </script> -->
+
+  <!-- 
+  <script>
+    box1 = document.getElementById('test')
+    box1.onclick = function() {
+      // alert("ok")
+      box1.innerHTML= '321' // 能修改指定dom文本，使用innerHTML若写入一段html代码 也会渲染成html代码 与ineertxtY有区别
+      box1.style.width = '500px'  // 能修改指定dom样式
+      console.log(box1.innerHTML); // 能获取所有文本及操作dom
+    }
+  </script>
+   -->
+
+   <!--
+   <script src="./tanzuo.js" defer></script>
+   <script>
+     window.onload = function() {
+       console.log('页面资源已加载完毕，再执行');
+     }
+     console.log(2);
+   </script>
+   -->
+  
+</body>
+</html>

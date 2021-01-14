@@ -15,11 +15,13 @@
             type="text"
             placeholder=" 输入城市名或拼音"
           />
-          <ul>
-            <li class="item" v-for="item in searchlist" :key="item.id">
-              {{ item.name }}
-            </li>
-          </ul>
+          <!-- <div style="width:2000px"> -->
+            <ul>
+              <li class="item" v-for="item in searchlist" :key="item.id">
+                {{ item.name }}
+              </li>
+            </ul>
+          <!-- </div> -->
         </div>
         <!-- <div class="cancel">取消</div> -->
       </div>
@@ -33,7 +35,7 @@
         定位失败
       </div>
     </div>
-    <ul>
+    <ul v-show="keyword ? '' : true ">
       <h5 style="color=#797d82">热门城市</h5>
       <div v-for="item in urlcities" :key="item.name">
         <div class="container" @click="changecity(item.cityId)">
@@ -251,7 +253,6 @@ export default {
     width 100%
     text-align center
     .search
-      text-align center
       margin-top 10px
       width 375px
       display inline-block
@@ -262,7 +263,7 @@ export default {
       box-sizing border-box
       z-index 100
       .item
-        z-index 100
+        z-index 101
         background yellow
         width 395px
         text-align left

@@ -7,7 +7,6 @@ import '@/assets/reset.css'
 // 按需导入elment
 // import './elment'
 
-
 import axios from 'axios'
 // 加上vue原型链全局使用s
 Vue.prototype.$http = axios
